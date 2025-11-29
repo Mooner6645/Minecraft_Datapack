@@ -1,0 +1,4 @@
+with open("run_two.mcfunction", "w") as file:
+    file.write("function particles:cone_spiral\n")
+    #replace with the function you want to run at the same time
+    file.write("function particles:heart\n")

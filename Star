@@ -1,0 +1,37 @@
+import math
+
+with open("star.mcfunction", "w") as file:
+    points = 200         # resolution of the curve
+    layers = 8           # how many rotated slices (depth)
+    layer_spacing = 0.15 # how much each layer rotates
+    scale = 2         # star size
+    height = 6           # lift it in the sky above player
+
+    for layer in range(layers):
+        # offset angle for each depth slice
+        offset = layer * layer_spacing
+
+        for i in range(points):
+            t = i / points * 2 * math.pi
+
+            # 5-point star: r = cos(5t)
+            r = math.cos(5 * t)
+
+            x = r * math.cos(t)
+            y = r * math.sin(t)
+            z = 0  # flat star, z added by rotation below
+
+            x *= scale
+            y *= scale
+            z *= scale
+
+            # Rotate around Y-axis (gives thickness effect)
+            x_rot = x * math.cos(offset) - z * math.sin(offset)
+            z_rot = x * math.sin(offset) + z * math.cos(offset)
+
+            # Lift star into the air
+            y_mc = y + height
+
+            file.write(
+                f"particle minecraft:end_rod ~{x_rot:.3f} ~{y_mc:.3f} ~{z_rot:.3f} 0 0 0 0 1\n"
+            )
