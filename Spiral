@@ -2,7 +2,7 @@ import math
 
 with open("spiral.mcfunction", "w") as file:
     for i in range(200): # Loop 200 times — each loop calculates one particle position
-        t = i / 10# t is the angle around the circle in radians dividing i / 10 controls how tightly the spiral twists
+        t = i / 10 # t is the angle around the circle in radians dividing i / 10 controls how tightly the spiral twists
         # X and Z form a circle using cosine and sine
         x = math.cos(t) * 3
         z = math.sin(t) * 3 # Multiplying by 3 sets the radius of the spiral
